@@ -4,13 +4,22 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import App from "./App";
+import Subscription from "./modules/subscription/Subscription";
+import Signin from "./modules/signin/Signin";
 import Signup from "./modules/signup/Signup";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Signup />,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
+  },
+  {
+    path: "/subscription",
+    element: <Subscription />,
   },
 ]);
 

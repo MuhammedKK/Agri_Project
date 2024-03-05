@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FaUser, FaIdCard, FaPhone, FaEnvelope, FaLock } from "react-icons/fa";
-import FormInput from "./component/FormInput";
-import Button from "./component/Button";
+import FormInput from "../../shared/FormInput";
+import Button from "../../shared/Button";
+import Sign from "../../assets/signup.png";
+import { Link } from "react-router-dom";
 
 // Yup Schema
 const schema = yup.object().shape({
@@ -18,7 +20,7 @@ const schema = yup.object().shape({
     .required("Password is required"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .oneOf([yup.ref("password")], "Passwords must match")
     .required("Confirm Password is required"),
 });
 
@@ -34,90 +36,100 @@ interface FormValues {
 
 const Signup = () => {
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit = (data: any) => {
     // Add your signup logic here
-    console.log("Form submitted:", data);
+    console.log(data);
   };
   return (
     <div className="flex items-center justify-center h-screen text-white">
       <div className="flex justify-between w-full max-w-screen-lg">
-        <div className="w-1/2">
-          <form action="">
+        <div className="w-1/2 mx-4">
+          <div className="text-center my-4">
+            <div className="parent-section text-3xl">Welcome to Agri-Sense</div>
+            <div className="child-section xl">
+              Create and account or{" "}
+              <Link to={"/signin"} className="main-color">
+                Log in
+              </Link>
+            </div>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
               type="text"
-              register={register}
-              name="test"
+              name="Fname"
               errors={errors}
               control={control}
               label="FullName"
               icon={<FaUser />}
               fullWidth
+              message="FullName required!"
             />
             <FormInput
               type="text"
-              register={register}
-              name="test"
+              name="Nid"
               errors={errors}
               control={control}
               label="NationalId"
               icon={<FaIdCard />}
+              fullWidth
+              message="NationalId required!"
             />
             <FormInput
               type="text"
-              register={register}
-              name="test"
+              name="phone"
               errors={errors}
               control={control}
               label="phoneNumber"
               icon={<FaPhone />}
+              fullWidth
+              message="Phone Number required!"
             />
             <FormInput
-              type="email"
-              register={register}
-              name="email"
-              errors={errors}
-              control={control}
+              type="text"
               label="email"
+              name="email"
+              fullWidth
+              control={control}
               icon={<FaEnvelope />}
+              errors={errors}
+              message="Email required!"
             />
             <FormInput
               type="password"
-              register={register}
-              name="test"
+              name="pass"
               errors={errors}
               control={control}
               label="Password"
               icon={<FaLock />}
+              fullWidth
+              message="Password required!"
             />
             <FormInput
               type="password"
-              register={register}
-              name="test"
+              name="Cpass"
               errors={errors}
               control={control}
               label="Confirm Password"
               icon={<FaLock />}
+              fullWidth
+              message="Confirm Password required!"
             />
             <Button
-                label="SignUp"
-                bgColor="#97B497"
-                textColor="#FFF"
-                fullwidth
+              label="SignUp"
+              bgColor="#97B497"
+              textColor="#FFF"
+              fullwidth
             />
           </form>
         </div>
 
-        <div className="w-1/2">
-          <h2 className="text-lg font-semibold mb-2">Subsection 2</h2>
-          <p>This is the content of Subsection 2.</p>
+        <div className="w-1/2 text-center flex items-center justify-center mx-4">
+          <img src={Sign} alt="" />
         </div>
       </div>
     </div>

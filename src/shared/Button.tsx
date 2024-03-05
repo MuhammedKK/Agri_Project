@@ -1,5 +1,5 @@
 // Button.tsx
-import React, { ReactNode } from "react";
+import React from "react";
 
 interface ButtonProps {
   label: string;
@@ -17,10 +17,10 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
 }: ButtonProps) => {
   const fullWidthClass = fullwidth ? "w-full" : "max-w-md";
-  const buttonClasses = `py-2 px-4 ${fullWidthClass} ${bgColor} ${textColor} rounded focus:outline-none focus:ring focus:border-blue-300 w-4/5`;
+  const buttonClasses = `py-2 px-4 ${fullWidthClass} ${bgColor} ${textColor} rounded-lg focus:outline-none focus:ring focus:border-blue-300 w-4/5`;
 
   return (
-    <button style={{backgroundColor: bgColor}} className={buttonClasses} onClick={onClick}>
+    <button type="submit" style={{backgroundColor: bgColor}} className={buttonClasses} onClick={onClick}>
       {label}
       
     </button>
