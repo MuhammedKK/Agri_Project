@@ -8,3 +8,16 @@ export class SignIn {
     return (await ClientCalls.post("auth/signin", data)).data;
   };
 }
+
+export class Signup {
+  static signup = async (data: {
+    fullName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    nationalId: string;
+    phone: string;
+  }): Promise<any> => {
+    return (await ClientCalls.post("auth/signup", data)).data;
+  };
+}
