@@ -24,7 +24,7 @@ const FormInput: React.FC<ReusableInputProps<any>> = ({
   fullWidth = false,
   message
 }) => {
-  const inputClasses = `w-full p-2 pl-10 border rounded-lg placeholder-opacity-50 focus:outline-none ${fullWidth ? 'block' : 'inline-block'}`;
+  const inputClasses = `w-full p-2 pl-10 border border-transparent rounded-lg placeholder-opacity-50 focus:outline-none ${fullWidth ? 'block' : 'inline-block'}`;
 
   const {
     field: { ref, ...inputProps },
@@ -48,7 +48,7 @@ const FormInput: React.FC<ReusableInputProps<any>> = ({
         <input
           type={showPassword ? 'text' : type}
           id={name.toString()}
-          placeholder={`Enter your ${label.toLowerCase()}`}
+          placeholder={`${label}`}
           className={inputClasses}
           style={{backgroundColor: "#2F2F2F"}}
           ref={ref}

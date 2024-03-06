@@ -7,6 +7,11 @@ import store from "./store/store";
 import Subscription from "./modules/subscription/Subscription";
 import Signin from "./modules/signin/Signin";
 import Signup from "./modules/signup/Signup";
+import Dashboard from "./modules/dashboard/Dashboard";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import ForgetPassword from "./modules/forgetpassword/ForgetPassword";
+import CheckMail from "./modules/forgetpassword/CheckMail";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +26,36 @@ const router = createBrowserRouter([
     path: "/subscription",
     element: <Subscription />,
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "/forgetPassword",
+    element: <ForgetPassword />,
+  },
+  {
+    path: "/checkMail",
+    element: <CheckMail />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </Provider>
   </React.StrictMode>
 );

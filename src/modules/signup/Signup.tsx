@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FaUser, FaIdCard, FaPhone, FaEnvelope, FaLock } from "react-icons/fa";
 import FormInput from "../../shared/FormInput";
 import Button from "../../shared/Button";
 import Sign from "../../assets/signup.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import 'animate.css';
+import { Signup as signup } from "../../api/auth/auth.api";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { SigninActions } from "../../store/reducers/slices/Signin.slice";
+import { AxiosError } from "axios";
 
 // Yup Schema
 const schema = yup.object().shape({
@@ -40,20 +45,40 @@ const Signup = () => {
     control,
     formState: { errors },
   } = useForm<FormValues>();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onSubmit = (data: any) => {
-    // Add your signup logic here
-    console.log(data);
+  const onSubmit = async (SignupData: any) => {
+    console.log(SignupData)
+    try {
+      const { data }:any = await signup.signup({
+        fullName: SignupData.Fname,
+        email: SignupData.email,
+        password: SignupData.pass,
+        confirmPassword: SignupData.Cpass,
+        nationalId: SignupData.Nid,
+        phone: SignupData.phone,
+      });
+
+      console.log(data);
+      toast.success('Signup Successfully!')
+      dispatch(SigninActions.setToken(data.accessToken));
+      navigate("/signin", {replace: true});
+    } catch (err : AxiosError | any) {
+      toast.error(`${err.response?.data?.message}`)
+      console.log(err.response?.data?.message);
+    }
   };
   return (
     <div className="flex items-center justify-center h-screen text-white">
       <div className="flex justify-between w-full max-w-screen-lg">
-        <div className="w-1/2 mx-4">
+
+        <div className="w-1/2 mx-4 animate__animated animate__backInLeft">
           <div className="text-center my-4">
             <div className="parent-section text-3xl">Welcome to Agri-Sense</div>
             <div className="child-section xl">
               Create and account or{" "}
-              <Link to={"/signin"} className="main-color">
+              <Link replace to={"/signin"} className="main-color">
                 Log in
               </Link>
             </div>
@@ -128,7 +153,7 @@ const Signup = () => {
           </form>
         </div>
 
-        <div className="w-1/2 text-center flex items-center justify-center mx-4">
+        <div className="w-1/2 text-center flex items-center justify-center mx-4 animate__animated animate__backInRight">
           <img src={Sign} alt="" />
         </div>
       </div>
