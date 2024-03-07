@@ -1,5 +1,4 @@
 import { HiOutlineMailOpen } from "react-icons/hi";
-import Button from "../../shared/Button";
 
 const CheckMail = () => {
   return (

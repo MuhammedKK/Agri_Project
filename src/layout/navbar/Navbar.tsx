@@ -1,11 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import User from "../../assets/user.png";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { useJwt } from "react-jwt";
 
+interface IDecodedToken {
+  exp: number;
+  lat: number;
+  id: string;
+  role: string;
+  user: IUser
+}
+
+interface IUser {
+  createdAt: string;
+  email: string;
+  name: string;
+  password: string;
+  role: string;
+  __v: number;
+  _id: string;
+}
+
 const Navbar = () => {
   const {token} = useSelector((state:any) => state.signin);
-  const data = useJwt(token);
+  const {decodedToken} = useJwt(token) as {decodedToken: IDecodedToken};
 
   return ( 
     <nav className="p-4 flex flex-wrap items-center justify-between text-white mb-5">
@@ -35,7 +54,7 @@ const Navbar = () => {
           <IoIosNotificationsOutline fontSize={25} />
         </div>
         <div className="text-white hidden md:block">
-          <span className="font-bold">{data.decodedToken?.user?.email}</span>
+          <span className="font-bold">{decodedToken?.user?.email}</span>
         </div>
         <div className="text-white">
           {/* Your user logo */}
