@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ForgetPassword from "./modules/forgetpassword/ForgetPassword";
 import CheckMail from "./modules/forgetpassword/CheckMail";
+import Loader from "./utils/Loader/Loader";
 
 const router = createBrowserRouter([
   {
@@ -43,10 +44,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
+      <Loader />
       <RouterProvider router={router} />
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
