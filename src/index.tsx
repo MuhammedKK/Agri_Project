@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ForgetPassword from "./modules/forgetpassword/ForgetPassword";
 import CheckMail from "./modules/forgetpassword/CheckMail";
 import Loader from "./utils/Loader/Loader";
+import ResetPassword from "./modules/forgetpassword/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/checkMail",
     element: <CheckMail />,
+  },
+  {
+    path: "/new-password",
+    element: <ResetPassword />,
   },
 ]);
 
