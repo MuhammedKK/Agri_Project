@@ -11,7 +11,6 @@ import { Signup as signup } from "../../api/auth/auth.api";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { SigninActions } from "../../store/reducers/slices/Signin.slice";
-import { AxiosError } from "axios";
 
 // Yup Schema
 const schema = yup.object().shape({
@@ -64,7 +63,7 @@ const Signup = () => {
       toast.success('Signup Successfully!')
       dispatch(SigninActions.setToken(data.accessToken));
       navigate("/signin", {replace: true});
-    } catch (err : AxiosError | any) {
+    } catch (err : any) {
       toast.error(`${err.response?.data?.message}`)
       console.log(err.response?.data?.message);
     }

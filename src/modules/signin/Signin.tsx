@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import FormInput from "../../shared/FormInput";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
@@ -8,11 +7,8 @@ import { SignIn } from "../../api/auth/auth.api";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SigninActions } from "../../store/reducers/slices/Signin.slice";
-import "animate.css";
+import 'animate.css';
 import { toast } from "react-toastify";
-
-
-
 
 const Signin = () => {
   const {
@@ -36,8 +32,8 @@ const Signin = () => {
       toast.success('Login Successfully!')
       dispatch(SigninActions.setToken(data.accessToken));
       navigate("/dashboard", {replace: true});
-    } catch (err) {
-      toast.error('Login Failed')
+    } catch (err: any) {
+      toast.error(`${err.response?.data?.message}`)
       console.log(err);
     }
   };

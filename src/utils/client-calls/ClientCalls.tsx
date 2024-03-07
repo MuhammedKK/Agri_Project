@@ -1,5 +1,7 @@
 import axios from "axios";
 import store from "../../store/store";
+import Interceptor from "../interceptor/Interceptor";
+
 
 const headers = {
   "Accept-Language": "application/json",
@@ -14,3 +16,5 @@ ClientCalls.interceptors.request.use((config) => {
   config.headers.Authorization = store.getState().signin.token;
   return config;
 });
+
+Interceptor(ClientCalls)
