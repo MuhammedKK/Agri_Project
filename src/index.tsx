@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     element: <CheckMail />,
   },
   {
-    path: "/new-password",
+    path: "/reset-password",
     element: <ResetPassword />,
   },
 ]);
