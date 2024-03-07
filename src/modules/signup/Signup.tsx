@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+// import * as yup from "yup";
 import { FaUser, FaIdCard, FaPhone, FaEnvelope, FaLock } from "react-icons/fa";
 import FormInput from "../../shared/FormInput";
 import Button from "../../shared/Button";
@@ -12,21 +12,21 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { SigninActions } from "../../store/reducers/slices/Signin.slice";
 
-// Yup Schema
-const schema = yup.object().shape({
-  fullName: yup.string().required("Full Name is required"),
-  nationalId: yup.string().required("National ID is required"),
-  phoneNumber: yup.string().required("Phone Number is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Confirm Password is required"),
-});
+// // Yup Schema
+// const schema = yup.object().shape({
+//   fullName: yup.string().required("Full Name is required"),
+//   nationalId: yup.string().required("National ID is required"),
+//   phoneNumber: yup.string().required("Phone Number is required"),
+//   email: yup.string().email("Invalid email").required("Email is required"),
+//   password: yup
+//     .string()
+//     .min(6, "Password must be at least 6 characters")
+//     .required("Password is required"),
+//   confirmPassword: yup
+//     .string()
+//     .oneOf([yup.ref("password")], "Passwords must match")
+//     .required("Confirm Password is required"),
+// });
 
 // interface
 interface FormValues {

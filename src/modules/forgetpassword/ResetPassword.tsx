@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import FormInput from "../../shared/FormInput";
 import { FaLock } from "react-icons/fa";
 import Button from "../../shared/Button";
