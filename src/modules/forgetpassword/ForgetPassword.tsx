@@ -1,9 +1,11 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from "../../shared/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormInput from "../../shared/FormInput";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { Token } from "../../api/auth/auth.api";
+import { toast } from "react-toastify";
 
 const ForgetPassword = () => {
   const {
@@ -14,8 +16,18 @@ const ForgetPassword = () => {
 
   const navigate = useNavigate()
 
-  const onSubmit = () => {
-    navigate('/checkMail', {replace: true})
+  const onSubmit = async (data:any) => {
+    console.log(data);
+    try {
+      const res = await Token.sendToken({
+        email: data.email
+      });
+      toast.success(res?.message);
+      navigate('/checkMail', {replace: true});
+    } catch (err:any) {
+      toast.error(err?.response?.data?.message)
+    }
+    // navigate('/checkMail', {replace: true})
   }
   return (
     <>
